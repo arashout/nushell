@@ -88,6 +88,7 @@ umask = "1.0.0"
 unicode-xid = "0.2.1"
 uuid_crate = {package = "uuid", version = "0.8.1", features = ["v4"]}
 which = "4.0.1"
+bat = "0.15.4"
 
 clipboard = {version = "0.5", optional = true}
 encoding_rs = "0.8.23"

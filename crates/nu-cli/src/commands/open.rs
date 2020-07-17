@@ -1,5 +1,4 @@
 use crate::commands::classified::maybe_text_codec::StringOrBinary;
-use crate::commands::constants::BAT_LANGUAGES;
 use crate::commands::WholeStreamCommand;
 use crate::prelude::*;
 use encoding_rs::{Encoding, UTF_8};
@@ -138,8 +137,11 @@ async fn open(args: CommandArgs, registry: &CommandRegistry) -> Result<OutputStr
                 CommandAction::AutoConvert(tagged_contents, ext),
             )));
         }
+
         // Check if bat does syntax highlighting
-        if BAT_LANGUAGES.contains(&ext.as_ref()) {
+        let ha = bat::assets::HighlightingAssets::from_binary();
+        let supports_syntax = ha.syntaxes().iter().map(|s| &s.name).any(|n| n == &ext);
+        if supports_syntax {
             let (_, tagged_contents) = crate::commands::open::fetch(
                 &cwd,
                 &PathBuf::from(&path.item),

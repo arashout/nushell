@@ -2500,6 +2500,7 @@ dependencies = [
  "async-recursion",
  "async-trait",
  "base64 0.12.3",
+ "bat",
  "bigdecimal",
  "bson",
  "byte-unit",
